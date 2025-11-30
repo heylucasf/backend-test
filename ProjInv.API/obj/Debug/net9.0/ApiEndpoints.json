@@ -1,0 +1,155 @@
+[
+  {
+    "ContainingType": "ProjInv.API.Controllers.InvestidorController",
+    "Method": "CriarInvestidor",
+    "RelativePath": "api/Investidor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ProjInv.Application.UseCases.Investidor.Commands.CriarInvestidorCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjInv.API.Controllers.InvestidorController",
+    "Method": "GetAllInvestidores",
+    "RelativePath": "api/Investidor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjInv.API.Controllers.InvestidorController",
+    "Method": "UpdateInvestidor",
+    "RelativePath": "api/Investidor/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ProjInv.Application.UseCases.Investidor.Commands.UpdateInvestidorCommand",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjInv.API.Controllers.InvestidorController",
+    "Method": "DeleteInvestidor",
+    "RelativePath": "api/Investidor/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjInv.API.Controllers.InvestimentoController",
+    "Method": "ListarInvestimentos",
+    "RelativePath": "api/investidor/{investidorId}/investimentos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "investidorId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjInv.API.Controllers.InvestimentoController",
+    "Method": "CriarInvestimento",
+    "RelativePath": "api/Investimento",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ProjInv.Application.UseCases.Investimento.Commands.CriarInvestimentoCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjInv.API.Controllers.InvestimentoController",
+    "Method": "GetInvestimentoById",
+    "RelativePath": "api/Investimento/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjInv.API.Controllers.InvestimentoController",
+    "Method": "RetirarInvestimento",
+    "RelativePath": "api/Investimento/{id}/retirar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "ProjInv.Application.UseCases.Investimento.Commands.RetirarInvestimentoCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

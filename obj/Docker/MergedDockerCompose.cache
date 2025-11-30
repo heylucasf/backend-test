@@ -1,0 +1,88 @@
+name: dockercompose2090175283844767027
+services:
+  projinv.api:
+    build:
+      context: C:\Users\Lucas\Desktop\backend-test\ProjInv
+      dockerfile: ProjInv.API/Dockerfile
+    container_name: projinv-api
+    depends_on:
+      sqlserver:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_HTTPS_PORTS: "8081"
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Server=sqlserver;Database=ProjInvestimento;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=true;
+    image: projinv-api
+    networks:
+      projinv-network: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "8080"
+        protocol: tcp
+      - mode: ingress
+        target: 8080
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: C:\Users\Lucas\Desktop\backend-test\ProjInv\logs
+        target: /app/logs
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\Lucas\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\Lucas\AppData\Roaming/Microsoft/UserSecrets
+        target: /root/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\Lucas\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\Lucas\AppData\Roaming/ASP.NET/Https
+        target: /root/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+  sqlserver:
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: YourStrong@Passw0rd
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    networks:
+      projinv-network: null
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "1433"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: volume
+        source: sql_data
+        target: /var/opt/mssql
+        volume: {}
+networks:
+  projinv-network:
+    name: dockercompose2090175283844767027_projinv-network
+    driver: bridge
+volumes:
+  sql_data:
+    name: dockercompose2090175283844767027_sql_data
