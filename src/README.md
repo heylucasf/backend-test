@@ -19,7 +19,7 @@ Este projeto implementa boas práticas de **Clean Architecture** e **S.O.L.I.D**
 - API .NET 9
 - Entity Framework Core (SQL Server)
 - Logging estruturado com Serilog
-- Validação de entrada com FluentValidation
+- Validação de entrada com FluentValidation/MediatR
 - Middleware de tratamento global de exceções
 - Testes com xUnit
 - Docker e docker-compose
@@ -97,13 +97,21 @@ Este projeto implementa boas práticas de **Clean Architecture** e **S.O.L.I.D**
 
 ### Investidor
 - `Id` (uniqueidentifier, PK)
-- `Nome` (nvarchar)
-- ...
+- `Nome` (nvarchar(200), NOT NULL)
 
 ### Investimento
 - `Id` (uniqueidentifier, PK)
-- `InvestidorId` (uniqueidentifier)
-- ...
+- `InvestidorId` (uniqueidentifier, FK → Investidor.Id)
+- `ValorInicial` (decimal(18,2), NOT NULL)
+- `DataCriacao` (datetime2, NOT NULL)
+
+### Retirada
+- `Id` (uniqueidentifier, PK)
+- `InvestimentoId` (uniqueidentifier, FK → Investimento.Id)
+- `DataRetirada` (datetime2, NOT NULL)
+- `ValorBruto` (decimal(18,2), NOT NULL)
+- `Impostos` (decimal(18,2), NOT NULL)
+- `ValorLiquido` (decimal(18,2), NOT NULL)
 
 ## 🧪 Testes
 
@@ -120,13 +128,38 @@ Este projeto implementa boas práticas de **Clean Architecture** e **S.O.L.I.D**
 
 ```
 backend-test/
-├── ProjInv.API/
-├── ProjInv.Application/
-├── ProjInv.Domain/
-├── ProjInv.Infrastructure/
-├── ProjInv.Tests/
-├── docker-compose.yml
-├── README.md
+├── ProjInv.API/                     # API (Controllers, Middleware, Configurações)
+│   ├── Controllers/                 # Endpoints da aplicação
+│   ├── appsettings.json             # Configurações da aplicação
+│   ├── Dockerfile                   # Dockerfile da API
+│   └── Program.cs                   # Ponto de entrada
+├── ProjInv.Application/             # Camada de Aplicação (DTOs, UseCases)
+│   ├── DTOs/                        # Data Transfer Objects
+│   │   ├── Requests/                # DTOs de requisição
+│   │   └── Responses/               # DTOs de resposta
+│   └── UseCases/                    # Casos de Uso (Handlers, Commands, Validators)
+│       ├── Investidor/              # UseCases de Investidor
+│       └── Investimento/            # UseCases de Investimento
+├── ProjInv.Domain/                  # Camada de Domínio (Entities, Interfaces)
+│   ├── Entities/                    # Entidades de domínio
+│   │   ├── Investidor.cs
+│   │   ├── Investimento.cs
+│   │   └── Retirada.cs
+│   └── Interfaces/                  # Interfaces de repositórios
+├── ProjInv.Infrastructure/          # Camada de Infraestrutura (Data, Repositories)
+│   ├── Data/                        # DbContext e configuração EF Core
+│   │   ├── AppDbContext.cs
+│   │   └── Configurations/          # Configurações EF Core
+│   ├── Migrations/                  # Migrações do banco de dados
+│   └── Repositories/                # Implementações dos repositórios
+├── ProjInv.Tests/                   # Projeto de testes
+│   ├── Application/                 # Testes de Handlers
+│   ├── Domain/                      # Testes de Entidades
+│   └── Infrastructure/              # Testes de Repositórios
+├── coverlet.runsettings             # Configuração de cobertura
+├── docker-compose.yml               # Configuração Docker Compose
+├── run_coverage.ps1                 # Script para rodar cobertura
+└── README.md                        # Este arquivo
 ```
 
 ## 🔧 Configuração
