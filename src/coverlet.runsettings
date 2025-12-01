@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat Code Coverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <Exclude>[ProjInv.Tests]*,[*.Tests]*,[ProjInv.Infrastructure]ProjInv.Infrastructure.Migrations.*</Exclude>
+          <ExcludeByFile>**/*Migrations/*.cs,**/*Program.cs,**/*Startup.cs,**/*AppDbContext.cs,**/*DTOs/*.cs,**/*Exception.cs,**/*Command.cs,**/*Query.cs,**/*Dto.cs,**/*DTO.cs,**/*Validator.cs,**/*Options.cs,**/*Configuration.cs</ExcludeByFile>
+          <ExcludeByAttribute>Obsolete,GeneratedCodeAttribute,CompilerGeneratedAttribute</ExcludeByAttribute>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

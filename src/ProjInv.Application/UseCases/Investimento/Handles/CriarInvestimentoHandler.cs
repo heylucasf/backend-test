@@ -44,7 +44,6 @@ namespace ProjInv.Application.UseCases.Investimento.Handles
             var investimento = new Domain.Entities.Investimento(request.InvestidorId, request.ValorInicial, request.DataCriacao);
             await _unitOfWork.Investimentos.AddAsync(investimento, cancellationToken);
 
-            // Commit através do UnitOfWork para garantir persistência transacional
             await _unitOfWork.CommitAsync();
 
             return new InvestimentoResponseDto
