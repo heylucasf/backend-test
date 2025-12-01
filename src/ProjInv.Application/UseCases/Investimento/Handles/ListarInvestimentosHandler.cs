@@ -7,12 +7,12 @@ using ProjInv.Application.UseCases.Investimento.Commands;
 
 namespace ProjInv.Application.UseCases.Investimento.Handles
 {
-    public class GetInvestimentoByIdHandler : IRequestHandler<ListarInvestimentosCommand, ListarInvestimentosResponseDto>
+    public class ListarInvestimentosHandler : IRequestHandler<ListarInvestimentosCommand, ListarInvestimentosResponseDto>
     {
         private readonly IUnitOfWork _uow;
         private readonly IValidator<ListarInvestimentosCommand> _validator;
 
-        public GetInvestimentoByIdHandler(IUnitOfWork uow, IValidator<ListarInvestimentosCommand> validator)
+        public ListarInvestimentosHandler(IUnitOfWork uow, IValidator<ListarInvestimentosCommand> validator)
         {
             _uow = uow;
             _validator = validator;
